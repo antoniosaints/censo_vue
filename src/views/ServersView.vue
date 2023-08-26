@@ -22,9 +22,7 @@
             </div>
             <div class="row">
               <div class="col-md-12 mt-4">
-                <button type="submit" class="btn btn-dark text-bold">
-                  Acessar
-                </button>
+                <ButtonOutline textButton="Acessar" typeButton="light" />
               </div>
             </div>
           </form>
@@ -54,7 +52,10 @@
 </template>
 
 <script>
+import ButtonOutline from "@/components/main/ButtonOutline.vue";
+
 export default {
+  components: { ButtonOutline },
   name: "ServersView",
   data() {
     return {
@@ -67,6 +68,9 @@ export default {
         name: "",
       },
     };
+  },
+  created() {
+    console.log(this.$store.state.user);
   },
   methods: {
     enviarForm(event) {
