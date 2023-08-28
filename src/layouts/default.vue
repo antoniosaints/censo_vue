@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-md-12">
-        <router-view></router-view>
-      </div>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 

@@ -9,7 +9,7 @@ const routes = [
     component: LayoutDefault,
     children: [
       {
-        path: "",
+        path: "whatsapp",
         component: ServersViewVue,
       },
     ],
