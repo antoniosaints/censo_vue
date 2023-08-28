@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios from "./api/axios";
-import "./index.css";
+import "./assets/css/main.css";
 
 const app = createApp(App); // createApp(App) Cria a aplicação
 app.use(router); // use(router) configura a aplicação para roteamento

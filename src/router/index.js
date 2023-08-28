@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LayoutDefault from "@/layouts/default.vue";
 import ServersViewVue from "@/views/ServersView.vue";
+import ListagemSolicitacoes from "@/views/solicitacoes/ListagemSolicitacoesView.vue";
 
 const routes = [
   {
@@ -11,6 +12,10 @@ const routes = [
       {
         path: "whatsapp",
         component: ServersViewVue,
+      },
+      {
+        path: "solicitacoes",
+        component: ListagemSolicitacoes,
       },
     ],
   },
