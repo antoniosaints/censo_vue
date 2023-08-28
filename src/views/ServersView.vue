@@ -2,9 +2,10 @@
   <div>
     <div class="bg-success p-4 text-white text-center m-2">
       <h2>Gestão de API WhatsApp</h2>
+      <button class="btn btn-light" @click="getUsuarios()">Usuários</button>
     </div>
     <div class="row text-white p-2">
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-4">
         <div class="bg-primary p-4">
           <h3 class="text-center">Lista de Servers</h3>
           <form class="form" @submit="enviarForm">
@@ -48,7 +49,7 @@
           </form>
         </div>
       </div>
-      <div class="col-md-9">
+      <div class="col-lg-9 col-md-8">
         <div class="row">
           <div class="col-md-12">
             <div class="bg-success p-2">
@@ -59,17 +60,17 @@
             <table class="table table-striped text-center">
               <thead>
                 <tr>
-                  <th scope="col">URL</th>
+                  <th scope="col">URL {{ $store.state.Usuarios.usuarios }}</th>
                   <th scope="col">TOKEN</th>
                   <th scope="col">Sessão</th>
                   <th scope="col">Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="server in $store.state.api" :key="server.id">
-                  <td>{{ server.url }}</td>
-                  <td>{{ server.token }}</td>
-                  <td>{{ server.session }}</td>
+                <tr v-for="server in usuarios" :key="server.id">
+                  <td>{{ server.nome }}</td>
+                  <td>{{ server.cidade }}</td>
+                  <td>{{ server.bairro }}</td>
                   <td>
                     <button
                       @click="$store.commit('removeServer', server.id)"
@@ -100,9 +101,24 @@ export default {
         token: "",
         session: "",
       },
+      usuarios: [],
     };
   },
+  created() {
+    console.log(this.usuarios);
+  },
   methods: {
+    async getUsuarios() {
+      await this.$axios
+        .get("http://localhost:5252/backend.php")
+        .then((result) => {
+          console.log(result);
+          this.usuarios = result.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     enviarForm(event) {
       event.preventDefault();
       if (!this.api.url || !this.api.token || !this.api.session) {
