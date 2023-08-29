@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div
-      class="bg-gray-200 dark:bg-gray-800 rounded-md p-4 text-center justify-center gap-4 text-gray-900 dark:text-white mx-2"
-    >
-      <h2 class="text-2xl font-bold">Gestão de API WhatsApp</h2>
-    </div>
-    <div class="flex text-white p-2 gap-2">
+    <div class="flex text-white px-4 gap-2">
       <div class="w-[25%]">
         <div class="dark:bg-gray-800 bg-gray-200 p-4 rounded-md">
           <h3
@@ -144,7 +139,6 @@
 
 <script>
 export default {
-  components: {},
   name: "ServersView",
   data() {
     return {
@@ -183,6 +177,8 @@ export default {
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
+          confirmButtonText: "Sim, deletar!",
+          cancelButtonText: "Cancelar",
         }).then((event) => {
           if (event.isConfirmed) {
             this.$axios
