@@ -13,6 +13,13 @@
       "token": "JU8g80B_@",
       "porta": 21645,
       "id": 2
+    },
+    {
+      "nome": "SERVER - CENSO",
+      "ip": "192.168.12.150",
+      "token": "NO_TOKEN",
+      "porta": 80,
+      "id": 3
     }
   ],
   "usuarios": [

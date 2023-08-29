@@ -78,6 +78,12 @@
                 >
                   Salvar
                 </button>
+                <button
+                  @click.prevent="limparForm"
+                  class="focus:outline-none text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                >
+                  Limpar
+                </button>
               </div>
             </div>
           </form>
@@ -166,6 +172,12 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    limparForm() {
+      this.api.nome = "";
+      this.api.ip = "";
+      this.api.token = "";
+      this.api.porta = "";
     },
     deleteServer(id) {
       console.log(id);
