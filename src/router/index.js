@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LayoutDefault from "@/layouts/default.vue";
 import ServersViewVue from "@/views/ServersView.vue";
 import ListagemSolicitacoes from "@/views/solicitacoes/ListagemSolicitacoesView.vue";
+import Login from "@/views/LoginView.vue";
 
 const routes = [
   {
@@ -10,7 +11,7 @@ const routes = [
     component: LayoutDefault,
     children: [
       {
-        path: "whatsapp",
+        path: "servers",
         component: ServersViewVue,
       },
       {
@@ -18,6 +19,11 @@ const routes = [
         component: ListagemSolicitacoes,
       },
     ],
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
   },
 ];
 

@@ -1,0 +1,44 @@
+{
+  "servers": [
+    {
+      "nome": "API - CAS",
+      "ip": "192.168.12.147",
+      "token": "MANAGERCAS2018",
+      "porta": 21465,
+      "id": 1
+    },
+    {
+      "nome": "API - EXTERNA",
+      "ip": "13.200.232.2",
+      "token": "JU8g80B_@",
+      "porta": 21645,
+      "id": 2
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "name": "Antonio Costa dos Santos",
+      "email": "costaantonio883@gmail.com",
+      "password": "cas20182018",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "User",
+      "email": "user@user.com",
+      "password": "123",
+      "role": "user"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "admin"
+    },
+    {
+      "id": 2,
+      "name": "user"
+    }
+  ]
+}

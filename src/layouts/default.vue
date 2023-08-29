@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="isDarkMode">
     <div class="antialiased bg-gray-50 dark:bg-gray-900">
       <nav
         class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50"
@@ -50,7 +50,7 @@
                 alt="Flowbite Logo"
               />
               <span
-                class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+                class="self-center text-2xl hidden md:block font-semibold whitespace-nowrap dark:text-white"
                 >Flowbite</span
               >
             </a>
@@ -106,6 +106,26 @@
               </svg>
             </button>
             <!-- Notifications -->
+            <button
+              type="button"
+              @click="toggleDarkMode()"
+              class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            >
+              <span class="sr-only">DarkMode</span>
+              <!-- Bell icon -->
+              <svg
+                id="theme-toggle-light-icon"
+                class="w-6 h-6"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314 8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z"
+                ></path>
+              </svg>
+            </button>
             <button
               type="button"
               data-dropdown-toggle="notification-dropdown"
@@ -786,9 +806,7 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                  >Documentos</span
-                >
+                <span class="flex-1 ml-3 text-left whitespace-nowrap">ADM</span>
                 <svg
                   aria-hidden="true"
                   class="w-6 h-6"
@@ -806,9 +824,9 @@
               <ul id="dropdown-pages" class="hidden py-2 space-y-2">
                 <li>
                   <router-link
-                    to="enviados"
+                    to="servers"
                     class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Enviados</router-link
+                    >Servers</router-link
                   >
                 </li>
                 <li>
@@ -1094,7 +1112,7 @@
         </div>
       </aside>
 
-      <main class="md:ml-64 h-auto pt-20">
+      <main class="md:ml-64 h-full pt-20 pb-5 min-h-screen">
         <!-- conteudo aqui -->
         <router-view></router-view>
       </main>
@@ -1103,35 +1121,37 @@
 </template>
 
 <script>
-import {
-  initFlowbite,
-  initAccordions,
-  initCarousels,
-  initCollapses,
-  initDials,
-  initDismisses,
-  initDrawers,
-  initDropdowns,
-  initModals,
-  initPopovers,
-  initTabs,
-  initTooltips,
-} from "flowbite";
+import { initFlowbite } from "flowbite";
 export default {
   name: "DefaultLayout",
-  mounted() {
+  created() {
     initFlowbite();
-    initAccordions();
-    initCarousels();
-    initCollapses();
-    initDials();
-    initDismisses();
-    initDrawers();
-    initDropdowns();
-    initModals();
-    initPopovers();
-    initTabs();
-    initTooltips();
+    this.getThemeLocal();
+  },
+  data() {
+    return {
+      isDarkMode: "light",
+    };
+  },
+  methods: {
+    getThemeLocal() {
+      if (localStorage.getItem("theme") == "dark") {
+        this.isDarkMode = "dark";
+      } else {
+        this.isDarkMode = "light";
+      }
+    },
+    toggleDarkMode() {
+      if (this.isDarkMode == "") {
+        console.log(localStorage.getItem("theme"));
+        this.isDarkMode = "dark";
+        localStorage.setItem("theme", "dark");
+      } else {
+        console.log(localStorage.getItem("theme"));
+        this.isDarkMode = "";
+        localStorage.setItem("theme", "light");
+      }
+    },
   },
 };
 </script>

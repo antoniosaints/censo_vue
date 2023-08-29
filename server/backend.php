@@ -9,10 +9,10 @@ header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Max-Age: 3600");
 class Main
 {
-    protected $host = '192.168.12.150';
+    protected $host = 'localhost';
     protected $user = 'root';
     protected $pass = '';
-    protected $db = 'censo.cas';
+    protected $db = 'gestaozap';
     private function connection()
     {
         try {
@@ -25,11 +25,11 @@ class Main
         return $conection;
     }
 
-    public function getUsers()
+    public function getServers()
     {
         $conn = $this->connection();
 
-            $sql = "SELECT * FROM usuarios";
+            $sql = "SELECT * FROM zapi_servers";
 
             try {
                 $stmt = $conn->prepare($sql);
@@ -44,4 +44,4 @@ class Main
     }
 }
 
-echo json_encode((new Main())->getUsers());
+echo json_encode((new Main())->getServers());
