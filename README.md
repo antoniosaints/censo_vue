@@ -20,4 +20,6 @@ json-server --watch api.json
 ## Baixe o projeto e inicie
 ```
 npm install
+
+npm run serve
 ```
