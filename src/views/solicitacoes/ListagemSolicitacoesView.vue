@@ -2116,33 +2116,11 @@ Standard glass, 3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boo
   </div>
 </template>
 <script>
-import {
-  initAccordions,
-  initCarousels,
-  initCollapses,
-  initDials,
-  initDismisses,
-  initDrawers,
-  initDropdowns,
-  initModals,
-  initPopovers,
-  initTabs,
-  initTooltips,
-} from "flowbite";
+import { initFlowbite } from "flowbite";
 export default {
   name: "ListagemSolicitacoesView",
   mounted() {
-    initAccordions();
-    initCarousels();
-    initCollapses();
-    initDials();
-    initDismisses();
-    initDrawers();
-    initDropdowns();
-    initModals();
-    initPopovers();
-    initTabs();
-    initTooltips();
+    initFlowbite();
   },
 };
 </script>

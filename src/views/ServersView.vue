@@ -10,7 +10,7 @@
           </h3>
           <form class="form" @submit="salvaServer">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label
                   for="server"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -25,7 +25,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label
                   for="server"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -40,7 +40,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label
                   for="server"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -55,7 +55,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label
                   for="server"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -143,103 +143,102 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "ServersView",
-  data() {
-    return {
-      api: {
-        nome: "",
-        ip: "",
-        token: "",
-        porta: "",
-      },
-      servers: [],
-    };
-  },
-  mounted() {
-    console.log(this.servers);
-    this.getUsuarios();
-  },
-  methods: {
-    async getUsuarios() {
-      await this.$axios
-        .get("servers")
-        .then((result) => {
-          console.log(result.headers);
-          this.servers = result.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    limparForm() {
-      this.api.nome = "";
-      this.api.ip = "";
-      this.api.token = "";
-      this.api.porta = "";
-    },
-    deleteServer(id) {
-      console.log(id);
-      if (id) {
-        this.$swal({
-          title: "Tem certeza?",
-          text: "Você não poderá reverter isso!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Sim, deletar!",
-          cancelButtonText: "Cancelar",
-        }).then((event) => {
-          if (event.isConfirmed) {
-            this.$axios
-              .delete(`servers/${id}`)
-              .then((response) => {
-                console.log(response);
-                this.getUsuarios();
-                this.$swal({
-                  icon: "success",
-                  title: "Deletado!",
-                  text: "O servidor foi deletado com sucesso!",
-                });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-        });
-      }
-    },
-    salvaServer(event) {
-      event.preventDefault();
-      if (
-        !this.api.nome ||
-        !this.api.token ||
-        !this.api.porta ||
-        !this.api.ip
-      ) {
-        this.$swal({
-          icon: "error",
-          title: "Preencha todos os campos",
-          confirmButtonText: "Ok",
-        });
-      } else {
-        this.$axios
-          .post("servers", this.api)
-          .then((result) => {
-            console.log(result);
-            this.getUsuarios();
-            this.api.nome = "";
-            this.api.ip = "";
-            this.api.token = "";
-            this.api.porta = "";
+<script setup>
+import { inject, onMounted, ref } from "vue";
+import axios from "@/services/axios";
+const swal = inject("$swal");
+
+const api = ref({
+  nome: "",
+  ip: "",
+  token: "",
+  porta: "",
+});
+
+const servers = ref([]);
+
+const getUsuarios = async () => {
+  await axios
+    .get("servers")
+    .then((result) => {
+      servers.value = result.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const limparForm = () => {
+  api.value.nome = "";
+  api.value.ip = "";
+  api.value.token = "";
+  api.value.porta = "";
+};
+
+const salvaServer = async (event) => {
+  event.preventDefault();
+  if (
+    !api.value.nome ||
+    !api.value.ip ||
+    !api.value.token ||
+    !api.value.porta
+  ) {
+    swal({
+      icon: "error",
+      title: "Preencha todos os campos",
+      confirmButtonText: "Ok",
+    });
+  } else {
+    await axios
+      .post("servers", api.value)
+      .then((result) => {
+        console.log(result);
+        api.value.nome = "";
+        api.value.ip = "";
+        api.value.token = "";
+        api.value.porta = "";
+        getUsuarios();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+};
+
+const deleteServer = (id) => {
+  console.log(id);
+  if (id) {
+    swal({
+      title: "Tem certeza?",
+      text: "Você não poderá reverter isso!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, deletar!",
+      cancelButtonText: "Cancelar",
+    }).then((event) => {
+      if (event.isConfirmed) {
+        axios
+          .delete(`servers/${id}`)
+          .then((response) => {
+            console.log(response);
+            getUsuarios();
+            swal({
+              icon: "success",
+              title: "Deletado!",
+              text: "O servidor foi deletado com sucesso!",
+            });
           })
           .catch((error) => {
             console.log(error);
           });
       }
-    },
-  },
+    });
+  }
 };
+
+onMounted(() => {
+  getUsuarios();
+});
 </script>
