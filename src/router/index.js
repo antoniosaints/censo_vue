@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LayoutDefault from "@/layouts/default.vue";
-import ServersViewVue from "@/views/ServersView.vue";
+import ServersViewVue from "@/views/servers/ServersView.vue";
 import ListagemSolicitacoes from "@/views/solicitacoes/ListagemSolicitacoesView.vue";
 import Login from "@/views/LoginView.vue";
 import Usuarios from "@/views/adm/UsuariosView.vue";
@@ -22,6 +22,10 @@ const routes = [
       {
         path: "usuarios",
         component: Usuarios,
+      },
+      {
+        path: "pokedex",
+        component: () => import("@/views/pokemons/PokedexView.vue"),
       },
     ],
   },

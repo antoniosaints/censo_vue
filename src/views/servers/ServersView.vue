@@ -144,11 +144,15 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref } from "vue";
+import { inject, onMounted, reactive, ref, defineOptions } from "vue";
 import axios from "@/services/axios";
+defineOptions({
+  name: "ListaDeServers",
+});
+
 const swal = inject("$swal");
 
-const api = ref({
+const api = reactive({
   nome: "",
   ip: "",
   token: "",
@@ -169,20 +173,15 @@ const getUsuarios = async () => {
 };
 
 const limparForm = () => {
-  api.value.nome = "";
-  api.value.ip = "";
-  api.value.token = "";
-  api.value.porta = "";
+  api.nome = "";
+  api.ip = "";
+  api.token = "";
+  api.porta = "";
 };
 
 const salvaServer = async (event) => {
   event.preventDefault();
-  if (
-    !api.value.nome ||
-    !api.value.ip ||
-    !api.value.token ||
-    !api.value.porta
-  ) {
+  if (!api.nome || !api.ip || !api.token || !api.porta) {
     swal({
       icon: "error",
       title: "Preencha todos os campos",
@@ -190,13 +189,13 @@ const salvaServer = async (event) => {
     });
   } else {
     await axios
-      .post("servers", api.value)
+      .post("servers", api)
       .then((result) => {
         console.log(result);
-        api.value.nome = "";
-        api.value.ip = "";
-        api.value.token = "";
-        api.value.porta = "";
+        api.nome = "";
+        api.ip = "";
+        api.token = "";
+        api.porta = "";
         getUsuarios();
       })
       .catch((error) => {

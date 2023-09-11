@@ -1,20 +1,5 @@
 {
-  "servers": [
-    {
-      "nome": "API - CAS",
-      "ip": "192.168.12.147",
-      "token": "MANAGERCAS2018",
-      "porta": 21465,
-      "id": 1
-    },
-    {
-      "nome": "CENSO",
-      "ip": "138.97.235.23",
-      "token": "CENSO",
-      "porta": 1233,
-      "id": 2
-    }
-  ],
+  "servers": [],
   "usuarios": [
     {
       "id": 1,

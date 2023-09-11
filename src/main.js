@@ -1,15 +1,16 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import { createPinia } from "pinia";
 import axios from "./services/axios";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./assets/css/main.css";
 
 const app = createApp(App); // createApp(App) Cria a aplicação
+const pinia = createPinia();
 app.use(router); // use(router) configura a aplicação para roteamento
-app.use(store); // use(store) configura a aplicação para armazenamento
+app.use(pinia); // use(pinia) configura a aplicação para pinia
 app.use(VueSweetalert2);
 app.config.globalProperties.$axios = axios; // configura a aplicação para axios
 
