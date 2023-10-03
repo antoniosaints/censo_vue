@@ -1236,42 +1236,34 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { defineOptions, onMounted, ref } from "vue";
 import { initFlowbite } from "flowbite";
-export default {
-  name: "DefaultLayout",
-  mounted() {
-    initFlowbite();
-    this.getThemeLocal();
-  },
-  updated() {
-    initFlowbite();
-  },
-  data() {
-    return {
-      isDarkMode: "light",
-      isMobilePhone: false,
-    };
-  },
-  methods: {
-    getThemeLocal() {
-      if (localStorage.getItem("theme") == "dark") {
-        this.isDarkMode = "dark";
-      } else {
-        this.isDarkMode = "light";
-      }
-    },
-    toggleDarkMode() {
-      if (this.isDarkMode == "light") {
-        console.log(localStorage.getItem("theme"));
-        this.isDarkMode = "dark";
-        localStorage.setItem("theme", "dark");
-      } else {
-        console.log(localStorage.getItem("theme"));
-        this.isDarkMode = "light";
-        localStorage.setItem("theme", "light");
-      }
-    },
-  },
+
+defineOptions({ name: "LayoutPadrao" });
+
+const isDarkMode = ref("light");
+const isMobilePhone = ref(false);
+const getThemeLocal = () => {
+  if (localStorage.getItem("theme") == "dark") {
+    isDarkMode.value = "dark";
+  } else {
+    isDarkMode.value = "light";
+  }
 };
+
+const toggleDarkMode = () => {
+  if (isDarkMode.value == "dark") {
+    isDarkMode.value = "light";
+    localStorage.setItem("theme", "light");
+  } else {
+    isDarkMode.value = "dark";
+    localStorage.setItem("theme", "dark");
+  }
+};
+
+onMounted(() => {
+  initFlowbite();
+  getThemeLocal();
+});
 </script>
