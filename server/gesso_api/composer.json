@@ -1,0 +1,16 @@
+{
+    "name": "gessoapi/api",
+    "description": "Sistema gesso api",
+    "autoload": {
+        "psr-4": {
+            "Gessoapi\\Api\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "antoniosaints",
+            "email": "costaantonio883@gmail.com"
+        }
+    ],
+    "require": {}
+}

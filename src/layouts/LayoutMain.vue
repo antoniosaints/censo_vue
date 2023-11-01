@@ -884,25 +884,13 @@
               </button>
               <ul id="dropdown-sales" class="hidden py-2 space-y-2">
                 <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Products</a
-                  >
+                  <ButtonLink to="products" label="Products" />
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Billing</a
-                  >
+                  <ButtonLink to="billing" label="Billing" />
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Invoice</a
-                  >
+                  <ButtonLink to="invoice" label="Invoice" />
                 </li>
               </ul>
             </li>
@@ -925,7 +913,7 @@
                     d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
                   ></path>
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Solicitações</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">Conexões</span>
                 <span
                   class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold rounded-full text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800"
                 >
@@ -970,29 +958,7 @@
                   ></path>
                 </svg>
               </button>
-              <ul id="dropdown-authentication" class="hidden py-2 space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Sign In</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Sign Up</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Esqueci minha senha</a
-                  >
-                </li>
-              </ul>
+              <optionMenuLink :links="autentication" />
             </li>
           </ul>
           <ul
@@ -1239,6 +1205,8 @@
 <script setup>
 import { defineOptions, onMounted, ref } from "vue";
 import { initFlowbite } from "flowbite";
+import optionMenuLink from "@/components/sections/optionsMenu.vue";
+import ButtonLink from "@/components/main/routerButton.vue";
 
 defineOptions({ name: "LayoutPadrao" });
 
@@ -1252,6 +1220,10 @@ const getThemeLocal = () => {
   }
 };
 
+const autentication = [
+  { to: "/signin", label: "Entrar" },
+  { to: "/signup", label: "Crie uma conta" },
+];
 const toggleDarkMode = () => {
   if (isDarkMode.value == "dark") {
     isDarkMode.value = "light";

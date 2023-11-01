@@ -1,3 +1,102 @@
+<script setup>
+import { inject, onMounted, reactive, ref, defineOptions } from "vue";
+import axios from "@/services/axios";
+defineOptions({
+  name: "ListaDeServers",
+});
+
+const swal = inject("$swal");
+
+const api = reactive({
+  nome: "",
+  ip: "",
+  token: "",
+  porta: "",
+});
+
+const servers = ref([]);
+
+const getUsuarios = async () => {
+  await axios
+    .get("servers")
+    .then((result) => {
+      servers.value = result.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const limparForm = () => {
+  api.nome = "";
+  api.ip = "";
+  api.token = "";
+  api.porta = "";
+};
+
+const salvaServer = async (event) => {
+  event.preventDefault();
+  if (!api.nome || !api.ip || !api.token || !api.porta) {
+    swal({
+      icon: "error",
+      title: "Preencha todos os campos",
+      confirmButtonText: "Ok",
+    });
+  } else {
+    await axios
+      .post("servers", api)
+      .then((result) => {
+        console.log(result);
+        api.nome = "";
+        api.ip = "";
+        api.token = "";
+        api.porta = "";
+        getUsuarios();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+};
+
+const deleteServer = (id) => {
+  console.log(id);
+  if (id) {
+    swal({
+      title: "Tem certeza?",
+      text: "Você não poderá reverter isso!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, deletar!",
+      cancelButtonText: "Cancelar",
+    }).then((event) => {
+      if (event.isConfirmed) {
+        axios
+          .delete(`servers/${id}`)
+          .then((response) => {
+            console.log(response);
+            getUsuarios();
+            swal({
+              icon: "success",
+              title: "Deletado!",
+              text: "O servidor foi deletado com sucesso!",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  }
+};
+
+onMounted(() => {
+  getUsuarios();
+});
+</script>
+
 <template>
   <div>
     <div class="flex text-white px-4 gap-2">
@@ -142,102 +241,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { inject, onMounted, reactive, ref, defineOptions } from "vue";
-import axios from "@/services/axios";
-defineOptions({
-  name: "ListaDeServers",
-});
-
-const swal = inject("$swal");
-
-const api = reactive({
-  nome: "",
-  ip: "",
-  token: "",
-  porta: "",
-});
-
-const servers = ref([]);
-
-const getUsuarios = async () => {
-  await axios
-    .get("servers")
-    .then((result) => {
-      servers.value = result.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-const limparForm = () => {
-  api.nome = "";
-  api.ip = "";
-  api.token = "";
-  api.porta = "";
-};
-
-const salvaServer = async (event) => {
-  event.preventDefault();
-  if (!api.nome || !api.ip || !api.token || !api.porta) {
-    swal({
-      icon: "error",
-      title: "Preencha todos os campos",
-      confirmButtonText: "Ok",
-    });
-  } else {
-    await axios
-      .post("servers", api)
-      .then((result) => {
-        console.log(result);
-        api.nome = "";
-        api.ip = "";
-        api.token = "";
-        api.porta = "";
-        getUsuarios();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-};
-
-const deleteServer = (id) => {
-  console.log(id);
-  if (id) {
-    swal({
-      title: "Tem certeza?",
-      text: "Você não poderá reverter isso!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim, deletar!",
-      cancelButtonText: "Cancelar",
-    }).then((event) => {
-      if (event.isConfirmed) {
-        axios
-          .delete(`servers/${id}`)
-          .then((response) => {
-            console.log(response);
-            getUsuarios();
-            swal({
-              icon: "success",
-              title: "Deletado!",
-              text: "O servidor foi deletado com sucesso!",
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    });
-  }
-};
-
-onMounted(() => {
-  getUsuarios();
-});
-</script>

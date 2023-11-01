@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ServersViewVue from "@/views/servers/ServersView.vue";
 import ListagemSolicitacoes from "@/views/solicitacoes/ListagemSolicitacoesView.vue";
 import Login from "@/views/LoginView.vue";
 import Usuarios from "@/views/adm/UsuariosView.vue";
@@ -7,12 +6,12 @@ import Usuarios from "@/views/adm/UsuariosView.vue";
 const routes = [
   {
     path: "/",
-    name: "servers",
+    name: "Main",
     component: () => import("@/layouts/LayoutMain.vue"),
     children: [
       {
         path: "servers",
-        component: ServersViewVue,
+        component: () => import("@/views/servers/ServersView.vue"),
       },
       {
         path: "solicitacoes",

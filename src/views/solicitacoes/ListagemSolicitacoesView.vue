@@ -614,7 +614,7 @@
                 <label
                   for="name"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Name</label
+                  >Nome do produto</label
                 >
                 <input
                   type="text"
@@ -629,13 +629,13 @@
                 <label
                   for="brand"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Brand</label
+                  >Cor</label
                 >
                 <input
-                  type="text"
+                  type="color"
                   name="brand"
                   id="brand"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Product brand"
                   required=""
                 />
@@ -644,7 +644,7 @@
                 <label
                   for="price"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Price</label
+                  >Preço por unidade</label
                 >
                 <input
                   type="number"
@@ -659,23 +659,23 @@
                 <label
                   for="category"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Category</label
+                  >Unidade</label
                 ><select
                   id="category"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected="">Select category</option>
-                  <option value="TV">TV/Monitors</option>
-                  <option value="PC">PC</option>
-                  <option value="GA">Gaming/Console</option>
-                  <option value="PH">Phones</option>
+                  <option selected="">Selecione a unidade</option>
+                  <option value="sc40kg">Saco 40Kg</option>
+                  <option value="ml">Mililitros</option>
+                  <option value="g">Grama</option>
+                  <option value="l">Litro</option>
                 </select>
               </div>
               <div class="sm:col-span-2">
                 <label
                   for="description"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Description</label
+                  >Observação</label
                 ><textarea
                   id="description"
                   rows="4"
@@ -700,7 +700,7 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              Add new product
+              Salvar
             </button>
           </form>
         </div>
@@ -1057,106 +1057,10 @@ import { reactive } from "vue";
 const data = reactive({
   solicitacoes: [
     {
-      nome: "iPhone 12 Pro",
+      nome: "Connection 01",
       preco: 999.99,
       memoriaRam: "6 GB",
       tem5G: true,
-    },
-    {
-      nome: "iPhone 12",
-      preco: 699.99,
-      memoriaRam: "4 GB",
-      tem5G: true,
-    },
-    {
-      nome: "iPhone SE",
-      preco: 399.99,
-      memoriaRam: "3 GB",
-      tem5G: false,
-    },
-    {
-      nome: "iPhone 11 Pro",
-      preco: 999.99,
-      memoriaRam: "4 GB",
-      tem5G: false,
-    },
-    {
-      nome: "iPhone XR",
-      preco: 599.99,
-      memoriaRam: "3 GB",
-      tem5G: false,
-    },
-    {
-      nome: "iPhone 8 Plus",
-      preco: 499.99,
-      memoriaRam: "3 GB",
-      tem5G: false,
-    },
-    {
-      nome: "iPhone SE (1ª geração)",
-      preco: 349.99,
-      memoriaRam: "2 GB",
-      tem5G: false,
-    },
-    {
-      nome: "Notebook Dell XPS 15",
-      preco: 1499.99,
-      memoriaRam: "16 GB",
-      tem5G: false,
-    },
-    {
-      nome: "Notebook HP Spectre x360",
-      preco: 1299.99,
-      memoriaRam: "8 GB",
-      tem5G: true,
-    },
-    {
-      nome: "Notebook Lenovo ThinkPad X1 Carbon",
-      preco: 1399.99,
-      memoriaRam: "16 GB",
-      tem5G: true,
-    },
-    {
-      nome: "Notebook ASUS ZenBook",
-      preco: 999.99,
-      memoriaRam: "8 GB",
-      tem5G: false,
-    },
-    {
-      nome: "Notebook Acer Swift 5",
-      preco: 799.99,
-      memoriaRam: "8 GB",
-      tem5G: false,
-    },
-    {
-      nome: "Notebook Microsoft Surface Laptop 4",
-      preco: 1299.99,
-      memoriaRam: "16 GB",
-      tem5G: true,
-    },
-    {
-      nome: "Notebook Apple MacBook Air",
-      preco: 1199.99,
-      memoriaRam: "8 GB",
-      tem5G: false,
-    },
-    {
-      nome: "Notebook Lenovo Yoga C940",
-      preco: 1099.99,
-      memoriaRam: "12 GB",
-      tem5G: false,
-    },
-    {
-      nome: "Notebook HP Envy x360",
-      preco: 999.99,
-      memoriaRam: "8 GB",
-      tem5G: true,
-    },
-    {
-      nome: "Notebook ASUS ROG Zephyrus",
-      preco: 1699.99,
-      memoriaRam: "32 GB",
-      tem5G: false,
     },
   ],
   usuarios: [],

@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="w-full mt-4 flex gap-2 flex-wrap justify-center">
-      <CardPokemon :pokemons="reqPokemons().pokemons" />
+      <CardPokemon :pokemons="requestPokemon.pokemons" />
     </div>
   </div>
 </template>
